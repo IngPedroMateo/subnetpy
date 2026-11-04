@@ -64,20 +64,28 @@ def calcular_detalles_ipv4(ip_str: str, prefijo: int | str) -> ResultadoSubred:
     )
 
 
-# ==========================================
-# Ejemplo de uso con '192.168.200.154' y '/27'
-# ==========================================
+# 
+# Ejecución interactiva por consola
+# 
 if __name__ == "__main__":
-    ip_entrada = "192.168.200.154"
-    prefijo_entrada = "/27"
+    try:
+        # Solicitud de datos interactiva al usuario
+        ip_entrada = input("Ingresa la dirección IPv4 (ejemplo: 8.8.8.8): ").strip()
+        prefijo_entrada = input("Ingresa el prefijo: ").strip()
 
-    res = calcular_detalles_ipv4(ip_entrada, prefijo_entrada)
+        # Cálculo de métricas
+        res = calcular_detalles_ipv4(ip_entrada, prefijo_entrada)
 
-    print("=== RESULTADOS DEL CÁLCULO DE SUBRED ===")
-    print(f"IPv4 Ingresada       : {res.ipv4_ingresada}/{res.prefijo}")
-    print(f"ID de Red            : {res.id_red}")
-    print(f"Broadcast            : {res.broadcast}")
-    print(f"Máscara de Subred    : {res.mascara_subred}")
-    print(f"Hosts Totales        : {res.hosts_totales}")
-    print(f"Hosts Disponibles    : {res.hosts_disponibles}")
-    print(f"Rango de Red Útil    : {res.rango_red}")
+        print("\n=== RESULTADOS DEL CÁLCULO DE SUBRED ===")
+        print(f"IPv4 Ingresada       : {res.ipv4_ingresada}/{res.prefijo}")
+        print(f"ID de Red            : {res.id_red}")
+        print(f"Broadcast            : {res.broadcast}")
+        print(f"Máscara de Subred    : {res.mascara_subred}")
+        print(f"Hosts Totales        : {res.hosts_totales}")
+        print(f"Hosts Disponibles    : {res.hosts_disponibles}")
+        print(f"Rango de Red Útil    : {res.rango_red}")
+
+    except ValueError as e:
+        print(f"\n[Error de Entrada]: La dirección IP o el prefijo ingresado no es válido ({e}).")
+    except Exception as e:
+        print(f"\n[Error inesperado]: {e}")
